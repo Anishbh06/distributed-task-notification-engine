@@ -48,7 +48,7 @@ services:
           type: redis
           name: task-engine-redis
           property: connectionString
-    dockerCommand: sh -c "python -m http.server 10000 & sleep 1 && celery -A app.core.celery_app worker --loglevel=info --pool=threads"
+    dockerCommand: sh /app/scripts/worker.sh
 
   - type: redis
     name: task-engine-redis
