@@ -1,3 +1,4 @@
+# Render Blueprint - Multi-service deployment
 services:
   - type: web
     name: task-engine-api
@@ -12,12 +13,12 @@ services:
           property: connectionString
       - key: REDIS_URL
         fromService:
-          type: keyvalue
+          type: redis
           name: task-engine-redis
           property: connectionString
       - key: CELERY_BROKER_URL
         fromService:
-          type: keyvalue
+          type: redis
           name: task-engine-redis
           property: connectionString
       - key: JWT_SECRET_KEY
@@ -32,7 +33,6 @@ services:
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
-    startCommand: celery -A app.core.celery_app worker --loglevel=info --pool=threads
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -40,19 +40,20 @@ services:
           property: connectionString
       - key: REDIS_URL
         fromService:
-          type: keyvalue
+          type: redis
           name: task-engine-redis
           property: connectionString
       - key: CELERY_BROKER_URL
         fromService:
-          type: keyvalue
+          type: redis
           name: task-engine-redis
           property: connectionString
+    dockerCommand: celery -A app.core.celery_app worker --loglevel=info --pool=threads
 
-  - type: keyvalue
+  - type: redis
     name: task-engine-redis
     plan: free
-    ipAllowList: []
+    ipAllowList: [] # Only allow internal connections
 
 databases:
   - name: task-engine-db
