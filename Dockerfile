@@ -16,7 +16,9 @@ COPY . .
 
 # Fix Windows CRLF and set permissions
 RUN sed -i 's/\r$//' /app/scripts/entrypoint.sh && \
+    sed -i 's/\r$//' /app/scripts/worker.sh && \
     chmod +x /app/scripts/entrypoint.sh && \
+    chmod +x /app/scripts/worker.sh && \
     chown -R appuser:appuser /app
 
 USER appuser
