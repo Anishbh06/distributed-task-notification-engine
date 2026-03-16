@@ -137,10 +137,16 @@ Tests mock the Celery broker and Redis Pub/Sub; integration tests verify databas
 
 ## Deployment (Render)
 
-1. Create a new Blueprint from this repo
-2. Add a Redis instance in the Render Dashboard
-3. Set `REDIS_URL` and `CELERY_BROKER_URL` for web and worker services
-4. Deploy via `render.yaml`
+The project includes a fully automated `render.yaml` Blueprint.
+
+**Live Demo (Swagger UI):** [https://task-engine-api.onrender.com/docs](https://task-engine-api.onrender.com/docs)
+
+1. Go to the [Render Dashboard](https://dashboard.render.com/)
+2. Click **New +** and select **Blueprint**
+3. Connect this repository
+4. Click **Apply**
+
+Render will automatically provision the underlying PostgreSQL database, managed Redis instance, the FastAPI web service, and the Celery background worker. All Environment Variables (like `DATABASE_URL`, `REDIS_URL`) are automatically wired.
 
 ## Windows Note
 
