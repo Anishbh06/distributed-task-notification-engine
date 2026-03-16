@@ -62,8 +62,8 @@ def simulate_heavy_task(self, task_id: str) -> dict:
         update_task_progress(task_id, 0, TaskStatus.RUNNING.value)
         publish_progress(task_id, 0, TaskStatus.RUNNING.value)
 
-        for progress in [20, 40, 60, 80, 100]:
-            time.sleep(2)
+        for progress in range(1, 101):
+            time.sleep(0.5)
             status = TaskStatus.COMPLETED.value if progress == 100 else TaskStatus.RUNNING.value
             result = {"done": True} if progress == 100 else None
             update_task_progress(task_id, progress, status, result=result)
