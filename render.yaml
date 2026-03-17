@@ -48,12 +48,17 @@ services:
           type: redis
           name: task-engine-redis
           property: connectionString
+      - key: PROGRESS_CHANNEL        # ← was missing
+        value: task:progress
+      - key: JWT_SECRET_KEY          # ← was missing
+        generateValue: true
+    healthCheckPath: /health         # ← was missing, Render was killing the worker
     dockerCommand: sh /app/scripts/worker.sh
 
   - type: redis
     name: task-engine-redis
     plan: free
-    ipAllowList: [] # Only allow internal connections
+    ipAllowList: []
 
 databases:
   - name: task-engine-db
