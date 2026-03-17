@@ -2,6 +2,8 @@
 
 A production-grade API for submitting heavy background tasks with real-time WebSocket progress updates. Built for high-concurrency workloads with modular architecture.
 
+🎥 **Demo:** [Watch on Loom](https://www.loom.com/share/58f4c1919a654f1c941e7e94dcc2ded9) &nbsp;|&nbsp; 🚀 **Live API:** [Swagger UI](https://task-engine-api.onrender.com/docs)
+
 ## Architecture
 
 ```mermaid
